@@ -1,0 +1,63 @@
+<div class="container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Add Product</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+                <mat-form-field appearance="outline">
+                    <mat-label>Product Name</mat-label>
+                    <input matInput formControlName="name" placeholder="Enter product name" />
+                    <mat-error *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched">
+                        Product name is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput formControlName="description" placeholder="Enter product description"></textarea>
+                    <mat-error *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched">
+                        Description is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Price</mat-label>
+                    <input matInput formControlName="price" type="text" placeholder="Enter product price" />                    
+                    <mat-error *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched">
+                        Price is required
+                    </mat-error>
+                </mat-form-field>
+                <p>Price formatted: {{ price?.value | currency: 'COP':'symbol':'1.0-0' }}</p>
+
+                <mat-form-field>
+                    <mat-label>Category</mat-label>
+                    <mat-select formControlName="category">
+                        <mat-option *ngFor="let category of categories" [value]="category.id">
+                            {{ category.name }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched">
+                        Category is required
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="file-upload-container">
+                    <label class="file-upload-label">
+                        <span>Select a file</span>
+                        <input type="file" id="fileInput" (change)="onFileSelected($event)" hidden/>
+                        <mat-icon>attach_file</mat-icon>
+                    </label>
+
+                    <div *ngIf="selectedFile" class="image-preview">
+                        <div class="circle-image">
+                            <img [src]="imagePreview" alt="Selected image" class="preview-image" />
+                        </div>
+                    </div>
+                </div>
+
+                <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">Add Product</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

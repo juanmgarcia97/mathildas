@@ -1,0 +1,112 @@
+{
+  "brand": "Mathilda's by Mathilda's",
+  "navigation": {
+    "dashboard": "Dashboard",
+    "analytics": "Analytics",
+    "category": "Category",
+    "product": "Product",
+    "orders": "Orders",
+    "postCoupon": "Post Coupon",
+    "coupon": "Coupon",
+    "cart": "cart",
+    "myOrders": "My Orders",
+    "whishlist": "Whishlist",
+    "profile": "profile",
+    "logout": "Logout",
+    "login": "Login",
+    "signup": "Register",
+    "track": "Track Order"
+  },
+  "auth": {
+    "login": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "signup": {
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "terms": "I accept the terms and conditions"
+    }
+  },
+  "admin": {
+    "category": {
+      "name": "Name",
+      "description": "Description",
+      "add": "Add Category"
+    },
+    "product": {
+      "name": "Name",
+      "description": "Description",
+      "price": "Price",
+      "category": "Category",
+      "add": "Add Product"
+    },
+    "cards": {
+      "faq": "FAQ",
+      "update": "Update",
+      "delete": "Delete"
+    }
+  },
+  "errors": {
+    "auth": {
+      "login": {
+        "email": {
+          "required": "Email is required",
+          "invalid": "Invalid email format"
+        },
+        "password": {
+          "required": "Password is required"
+        }
+      },
+      "signup": {
+        "name": {
+          "required": "Name is required",
+          "minLength": "Name must be at least 2 characters long",
+          "maxLength": "Name must be at most 255 characters long"
+        },
+        "email": {
+          "required": "Email is required",
+          "invalid": "Invalid email format"
+        },
+        "password": {
+          "required": "Password is required",
+          "minLength": "Password must be at least 4 characters long",
+          "maxLength": "Password be at most 255 characters long"
+        },
+        "confirmPassword": {
+          "required": "Confirm Password is required",
+          "mismatch": "Passwords do not match"
+        },
+        "terms": {
+          "required": "You must accept the terms and conditions"
+        }
+      }
+    },
+    "admin": {
+      "category": {
+        "name": {
+          "required": "Category name is required"
+        },
+        "description": {
+          "required": "Description is required"
+        }
+      },
+      "product": {
+        "name": {
+          "required": "Product name is required"
+        },
+        "description": {
+          "required": "Description is required"
+        },
+        "price": {
+          "required": "Price is required"
+        },
+        "category": {
+          "required": "Category is required"
+        }
+      }
+    }
+  }
+}

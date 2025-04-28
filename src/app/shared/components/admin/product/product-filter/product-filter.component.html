@@ -1,0 +1,14 @@
+<div class="container">
+  <mat-form-field appearance="outline">
+    <mat-label>Search</mat-label>
+    <input
+      matInput
+      type="text"
+      class="filter"
+      placeholder="Search"
+      [(ngModel)]="searchText"
+      (ngModelChange)="filter.emit(searchText)"
+    />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</div>

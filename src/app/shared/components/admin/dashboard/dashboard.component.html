@@ -1,0 +1,11 @@
+<div class="actions">
+  <app-product-filter (filter)="filterProducts($event)" />
+</div>
+
+<div class="product-list">
+  <app-product-card
+    [product]="product"
+    *ngFor="let product of displayProducts"
+    (deleteClicked)="deleteProduct($event)"
+  ></app-product-card>
+</div>
