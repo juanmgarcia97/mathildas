@@ -1,0 +1,47 @@
+<div class="container">
+    <h2>Add Coupon</h2>
+
+    <form [formGroup]="couponForm" (ngSubmit)="postCoupon()">
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" required />
+            <mat-error *ngIf="couponForm.get('name')?.hasError('required')">
+                Coupon name is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Code</mat-label>
+            <input matInput formControlName="code" required />
+            <mat-error *ngIf="couponForm.get('code')?.hasError('required')">
+                Coupon code is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Discount Percentage</mat-label>
+            <input matInput formControlName="discount" required />
+            <mat-error *ngIf="couponForm.get('discount')?.hasError('required')">
+                Discount percentage is required
+            </mat-error>
+            <mat-error *ngIf="couponForm.get('discount')?.hasError('min')">
+                Discount percentage must be at least 0
+            </mat-error>
+            <mat-error *ngIf="couponForm.get('discount')?.hasError('max')">
+                Discount percentage cannot exceed 100
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Expiration Date</mat-label>
+            <input matInput formControlName="expirationDate" [matDatepicker]="picker" required />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="couponForm.get('expirationDate')?.hasError('required')">
+                Expiration date is required
+            </mat-error>
+            <mat-error *ngIf="couponForm.get('expirationDate')?.hasError('invalidDate')">
+                Expiration date must be in the future
+            </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">Add Coupon</button>
+    </form>
+</div>

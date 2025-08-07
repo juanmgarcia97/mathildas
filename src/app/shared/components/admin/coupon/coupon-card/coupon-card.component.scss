@@ -1,0 +1,21 @@
+.container {
+
+    .coupon-card {
+        max-width: 400px;
+        margin-bottom: 8px;
+        background-color: #fff;
+    }
+
+    .coupon-card-footer {
+        padding: 16px;
+        
+    }
+    .active {
+        color: #c34343 !important;
+    }
+
+    .inactive {
+        color: #343434;
+        background-color: #c4c4c4;
+    }
+}

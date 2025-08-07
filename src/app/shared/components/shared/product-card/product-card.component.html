@@ -19,10 +19,13 @@
       </div>
     </div>
     <mat-divider></mat-divider>
-    <div class="actions">
+    <div class="actions" *ngIf="isAdmin">
         <button mat-raised-button class="faq-button" [routerLink]="routes.admin.faq + product.id">FAQ</button>
         <button mat-raised-button class="update-button" [routerLink]="routes.admin.product + product.id">Update</button>
         <button mat-raised-button class="delete-button" (click)="deleteProduct()">Delete</button>
+    </div>
+    <div class="actions" *ngIf="isCustomer">
+        <button mat-raised-button class="update-button" (click)="addToCart()">Add to Cart</button>
     </div>
   </div>
 </mat-card>

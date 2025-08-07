@@ -7,6 +7,7 @@ import { SignUpRequest } from '../../../core/models/user.model';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { LOGIN } from '../../../core/constants/api-routes';
 import { CONSTANTS } from '../../../core/constants/general-constants';
+import { MessagesService } from '../../../core/services/messages/messages.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -27,6 +28,7 @@ export class SignUpComponent {
   formBuilder: FormBuilder = inject(FormBuilder);
   router: Router = inject(Router);
   authService: AuthService = inject(AuthService);
+  messagesService: MessagesService = inject(MessagesService);
 
   constructor() {
     this.signUpForm = this.formBuilder.group({
@@ -56,18 +58,15 @@ export class SignUpComponent {
       }
       this.authService.register(userData).subscribe({
         next: (response) => {
-          console.log('Registration successful', response);
-          // Navigate to the login page or show a success message
+          this.messagesService.addSuccessMessage(response.message);
           this.router.navigate([LOGIN]);
         },
         error: (error) => {
-          console.error('Registration failed', error);
-          // Handle error response
-          // Show an error message to the user
+          this.messagesService.addErrorMessage('Registration failed', error);
         }
       });
     } else {
-      console.log('Form is invalid');
+      this.messagesService.addErrorMessage('Form is invalid');
     }
   }
 

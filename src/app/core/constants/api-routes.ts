@@ -12,7 +12,7 @@ export const CATEGORY = 'category'
 export const PRODUCT = 'product'
 export const ORDERS = 'orders'
 export const POST_COUPON = 'post-coupon'
-export const COUPON = 'coupon'
+export const COUPONS = 'coupons'
 export const FAQ = 'faq'
 export const SEARCH = 'search'
 
@@ -36,7 +36,7 @@ export const API_ROUTES = {
         product: `${ADMIN_ROUTE + SLASH + PRODUCT}`,
         orders: `${ADMIN_ROUTE + SLASH + ORDERS}`,
         postCoupon: `${ADMIN_ROUTE + SLASH + POST_COUPON}`,
-        coupon: `${ADMIN_ROUTE + SLASH + COUPON}`,
+        coupon: `${ADMIN_ROUTE + SLASH + COUPONS}`,
         faq: `${ADMIN_ROUTE + SLASH + FAQ}`,
     },
     customer: {

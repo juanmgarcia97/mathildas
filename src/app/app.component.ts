@@ -1,12 +1,14 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { MATERIAL_IMPORTS } from './shared/material';
 import { UserStorageService } from './core/services/storage/user-storage.service';
 import { CommonModule } from '@angular/common';
 import { API_ROUTES } from './core/constants/api-routes';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { LANGUAGES } from './core/constants/general-constants';
 import { I18nService } from './core/i18n/i18n.service';
+import { AuthService } from './core/services/auth/auth.service';
+import { MessagesService } from './core/services/messages/messages.service';
 
 @Component({
   selector: 'app-root',
@@ -29,9 +31,18 @@ export class AppComponent {
 
   apiRoutes = API_ROUTES
 
+  authService: AuthService = inject(AuthService);
+  messagesService: MessagesService = inject(MessagesService);
+
   constructor(private router: Router, private i18nService: I18nService) { }
 
   ngOnInit() {
+    window.addEventListener('beforeunload', () => {
+      this.logout();
+    });
+
+    this.authService.startIdleWatcher();
+
     this.router.events.subscribe((event) => {
       this.isAdminLoggedIn.set(UserStorageService.isAdminLoggedIn());
       this.isCustomerLoggedIn.set(UserStorageService.isCustomerLoggedIn());
@@ -39,8 +50,8 @@ export class AppComponent {
   }
 
   logout() {
-    UserStorageService.signOut();
-    this.router.navigate(['/login']);
+    this.authService.logout();
+    this.router.navigate([this.apiRoutes.visitor.login])
   }
 
   isLanguageSet = (language: string) => this.i18nService.isLanguageSet(language);

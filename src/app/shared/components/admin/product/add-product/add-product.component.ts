@@ -52,8 +52,7 @@ export class AddProductComponent {
         this.categories = res.data as Category[];
       },
       error: (err: HttpErrorResponse) => {
-        console.log(err);
-        this.messagesService.addErrorMessage(err.message);
+        this.messagesService.addErrorMessage(err.error.message);
       },
     });
   }
@@ -66,7 +65,6 @@ export class AddProductComponent {
       formData.append('price', this.productForm.get('price')?.value);
       formData.append('categoryId', this.productForm.get('category')?.value);
       formData.append('file', this.selectedFile as Blob);
-      console.log(formData.values());
       this.adminService.createProduct(formData).subscribe({
         next: (res) => {
           this.messagesService.addSuccessMessage(res.message);
@@ -74,7 +72,7 @@ export class AddProductComponent {
           this.router.navigateByUrl(API_ROUTES.admin.dashboard)
         },
         error: (err: HttpErrorResponse) => {
-          this.messagesService.addErrorMessage(err.message);
+          this.messagesService.addErrorMessage(err.error.message);
         },
       });
     } else {

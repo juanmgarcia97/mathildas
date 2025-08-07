@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 import { CustomerComponent } from './customer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DASHBOARD } from '../../../core/constants/api-routes';
+import { CART, DASHBOARD } from '../../../core/constants/api-routes';
+import { CartComponent } from '../../../features/customer/cart/cart.component';
 
 export const CUSTOMER_ROUTES: Routes = [
   {
@@ -9,6 +10,7 @@ export const CUSTOMER_ROUTES: Routes = [
     children: [
       { path: '', component: CustomerComponent },
       { path: DASHBOARD, component: DashboardComponent },
+      { path: CART, component: CartComponent },
     ],
   },
 ];

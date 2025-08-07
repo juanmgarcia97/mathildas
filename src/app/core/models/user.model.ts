@@ -18,3 +18,4 @@ export type LoginRequest = {
     password: UserEntity['password'];
 };
 export type UserLoggedIn = Pick<UserEntity, 'id' | 'role'>;
+export type UserSignedUp = Pick<UserEntity, 'id' | 'name' | 'email' | 'role'>;

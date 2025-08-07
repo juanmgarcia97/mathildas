@@ -9,6 +9,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatChipsModule } from '@angular/material/chips';
 
 export const MATERIAL_IMPORTS = [
     MatButtonModule,
@@ -21,5 +24,8 @@ export const MATERIAL_IMPORTS = [
     MatSnackBarModule,
     MatSelectModule,
     MatOptionModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDatepickerModule,
+    MatExpansionModule,
+    MatChipsModule,
 ];

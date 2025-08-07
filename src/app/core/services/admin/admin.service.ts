@@ -6,6 +6,7 @@ import { ResponseBody } from '../../models/general.model';
 import { API_ENDPOINTS } from '../../constants/api-endpoints';
 import { Product } from '../../models/product.model';
 import { CONSTANTS } from '../../constants/general-constants';
+import { Coupon, CreateCoupon } from '../../models/coupon.model';
 
 @Injectable({
   providedIn: 'root',
@@ -116,5 +117,19 @@ export class AdminService {
           return res;
         })
       );
+  }
+
+  /* Coupons */
+  createCoupon(couponDTO: CreateCoupon): Observable<ResponseBody<Coupon>> {
+    return this.httpClient.post<ResponseBody<Coupon>>(
+      `${API_ENDPOINTS.admin.coupon.create}`,
+      couponDTO
+    );
+  }
+
+  getAllCoupons(): Observable<ResponseBody<Coupon[]>> {
+    return this.httpClient.get<ResponseBody<Coupon[]>>(
+      `${API_ENDPOINTS.admin.coupon.list}`
+    );
   }
 }

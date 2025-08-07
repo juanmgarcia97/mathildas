@@ -20,7 +20,7 @@
     <button mat-button [routerLink]="apiRoutes.admin.product">Product</button>
     <button mat-button [routerLink]="apiRoutes.admin.orders">Orders</button>
     <button mat-button [routerLink]="apiRoutes.admin.postCoupon">Post Coupon</button>
-    <button mat-button [routerLink]="apiRoutes.admin.coupon">Coupon</button>
+    <button mat-button [routerLink]="apiRoutes.admin.coupon">Coupons</button>
     <button mat-button routerLinkActive="active" (click)="logout()">Logout</button>
     <button mat-button *ngIf="isLanguageSet(LANGUAGES.english.code)" (click)="switchLanguage(LANGUAGES.spanish.code)">{{ LANGUAGES.spanish.name + '/' + LANGUAGES.spanish.flag }}</button>
     <button mat-button *ngIf="isLanguageSet(LANGUAGES.spanish.code)" (click)="switchLanguage(LANGUAGES.english.code)">{{ LANGUAGES.english.name + '/' + LANGUAGES.english.flag }}</button>

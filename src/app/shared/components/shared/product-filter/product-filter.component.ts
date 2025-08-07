@@ -3,7 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { MatFormField } from '@angular/material/input';
-import { MATERIAL_IMPORTS } from '../../../../material';
+import { MATERIAL_IMPORTS } from '../../../material';
 
 @Component({
   selector: 'app-product-filter',

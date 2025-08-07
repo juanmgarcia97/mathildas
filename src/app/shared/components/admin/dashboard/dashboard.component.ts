@@ -1,10 +1,11 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 import { Product } from '../../../../core/models/product.model';
 import { AdminService } from '../../../../core/services/admin/admin.service';
-import { ProductCardComponent } from '../product/product-card/product-card.component';
+import { ProductCardComponent } from '../../shared/product-card/product-card.component';
 import { CommonModule } from '@angular/common';
 import { MessagesService } from '../../../../core/services/messages/messages.service';
-import { ProductFilterComponent } from '../product/product-filter/product-filter.component';
+import { ProductFilterComponent } from '../../shared/product-filter/product-filter.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -32,8 +33,8 @@ export class DashboardComponent {
         this.products = res.data as Product[];
         this.displayProducts = this.products;
       },
-      error: (err) => {
-        console.error(err);
+      error: (err: HttpErrorResponse) => {
+        this.messagesService.addErrorMessage(err.error.message);
       },
     });
   }
@@ -50,8 +51,8 @@ export class DashboardComponent {
           }
         }
       },
-      error: (err) => {
-        this.messagesService.addErrorMessage(err.message);
+      error: (err: HttpErrorResponse) => {
+        this.messagesService.addErrorMessage(err.error.message);
       },
     });
   }

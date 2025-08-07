@@ -9,8 +9,8 @@ export class I18nService {
   readonly currentLanguage = signal<string>(LANGUAGES.english.code);
 
   constructor(private translate: TranslateService) {
-    const savedLang = localStorage.getItem('lang') || LANGUAGES.english.code;
-    this.translate.setDefaultLang(LANGUAGES.english.code);
+    const savedLang = localStorage.getItem('lang') || LANGUAGES.spanish.code;
+    this.translate.setDefaultLang(LANGUAGES.spanish.code);
     this.translate.use(savedLang).subscribe(() => {
       this.currentLanguage.set(savedLang);
     });

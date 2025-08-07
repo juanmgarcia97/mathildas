@@ -12,18 +12,9 @@ export class UserStorageService {
 
   constructor() { }
 
-  static saveToken(token: string): void {
-    window.localStorage.removeItem(TOKEN);
-    window.localStorage.setItem(TOKEN, token);
-  }
-
   static saveUser(user: any): void {
     window.localStorage.removeItem(USER);
     window.localStorage.setItem(USER, JSON.stringify(user));
-  }
-
-  static getToken(): string | null {
-    return window.localStorage.getItem(TOKEN);
   }
 
   static getUser(): UserLoggedIn {
@@ -54,23 +45,16 @@ export class UserStorageService {
   }
 
   static isAdminLoggedIn(): boolean {
-    if(this.getToken() === null) {
-      return false;
-    }
     const role = this.getUserRole();
     return role === UserRole.ADMIN;
   }
   
   static isCustomerLoggedIn(): boolean {
-    if(this.getToken() === null) {
-      return false;
-    }
     const role = this.getUserRole();
     return role === UserRole.CUSTOMER;
   }
 
-  static signOut(): void {
-    window.localStorage.removeItem(TOKEN);
-    window.localStorage.removeItem(USER);
+  static logout(): void {
+    window.localStorage.clear();
   }
 }

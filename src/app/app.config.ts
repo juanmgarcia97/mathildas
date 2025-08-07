@@ -14,12 +14,14 @@ import {
 import { httpInterceptor } from './core/interceptors/http.interceptor';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { createTranslateLoader } from './core/i18n/translate-loader';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptors([httpInterceptor])),
+    provideNativeDateAdapter(),
     importProvidersFrom(
       TranslateModule.forRoot({
         loader: {
