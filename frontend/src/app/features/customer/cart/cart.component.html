@@ -1,0 +1,48 @@
+<div *ngIf="cartItems.length > 0; else emptyCart">
+  <div class="cart-container">
+    <div class="cart-items">
+      <app-cart-item
+        *ngFor="let item of cartItems"
+        [cartItem]="item"
+        (modifyItemClicked)="modifyItemQuantity($event)"
+      ></app-cart-item>
+    </div>
+    <div class="total-price">
+      <h3>
+        Total Amount:
+        {{ order.totalAmount | currency : "COP" : "symbol" : "1.0-0" }}
+      </h3>
+    </div>
+    <div class="total-price">
+      <h3>
+        Amount: {{ order.amount | currency : "COP" : "symbol" : "1.0-0" }}
+      </h3>
+    </div>
+    <div class="total-price" *ngIf="order.couponCode != null">
+      <h3>
+        Coupon applied: {{ order.couponCode }}
+      </h3>
+    </div>
+    <div class="coupon-container" *ngIf="order.couponCode == null">
+        <input type="text" placeholder="Enter coupon code" [(ngModel)]="couponCode" />
+        <button mat-raised-button color="primary" (click)="applyCoupon()">
+          Apply Coupon
+        </button>
+    </div>
+    <div class="actions">
+      <button mat-raised-button color="primary" (click)="placeOrder()">
+        Place Order
+      </button>
+      <button mat-raised-button color="warn" (click)="clearCart()">
+        Clear Cart
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #emptyCart>
+  <div class="empty-cart">
+    <mat-icon class="icon">remove_shopping_cart</mat-icon>
+    <span>Nothing to see here</span>
+  </div>
+</ng-template>

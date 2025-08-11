@@ -1,0 +1,12 @@
+<div class="actions">
+    <app-product-filter (filter)="filterProducts($event)" />
+  </div>
+  
+  <div class="product-list">
+    <app-product-card
+      [product]="product"
+      *ngFor="let product of displayProducts"
+      (addToCartClicked)="addToCart($event)"
+    ></app-product-card>
+  </div>
+  

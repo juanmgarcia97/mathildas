@@ -1,0 +1,111 @@
+{
+  "brand": "Mathilda's por Mathilda's",
+  "navigation": {
+    "dashboard": "Tablero",
+    "analytics": "Analíticas",
+    "category": "Categoría",
+    "product": "Producto",
+    "orders": "Pedidos",
+    "postCoupon": "Publicar Cupón",
+    "coupon": "Cupón",
+    "cart": "Carrito",
+    "myOrders": "Mis Pedidos",
+    "whishlist": "Lista de Deseos",
+    "profile": "Perfil",
+    "logout": "Cerrar Sesión",
+    "login": "Iniciar Sesión",
+    "track": "Rastrear Pedido"
+  },
+  "auth": {
+    "login": {
+      "email": "Correo Electrónico",
+      "password": "Contraseña"
+    },
+    "signup": {
+      "name": "Nombre",
+      "email": "Correo Electrónico",
+      "password": "Contraseña",
+      "confirmPassword": "Confirmar Contraseña",
+      "terms": "Acepto los términos y condiciones"
+    }
+  },
+  "admin": {
+    "category": {
+      "name": "Nombre",
+      "description": "Descripción",
+      "add": "Agregar Categoría"
+    },
+    "product": {
+      "name": "Nombre",
+      "description": "Descripción",
+      "price": "Precio",
+      "category": "Categoría",
+      "add": "Agregar Producto"
+    },
+    "cards": {
+      "faq": "Preguntas Frecuentes",
+      "update": "Actualizar",
+      "delete": "Eliminar"
+    }
+  },
+  "errors": {
+    "auth": {
+      "login": {
+        "email": {
+          "required": "El correo electrónico es obligatorio",
+          "invalid": "Formato de correo electrónico no válido"
+        },
+        "password": {
+          "required": "La contraseña es obligatoria"
+        }
+      },
+      "signup": {
+        "name": {
+          "required": "El nombre es obligatorio",
+          "minLength": "El nombre debe tener al menos 2 caracteres",
+          "maxLength": "El nombre debe tener como máximo 255 caracteres"
+        },
+        "email": {
+          "required": "El correo electrónico es obligatorio",
+          "invalid": "Formato de correo electrónico no válido"
+        },
+        "password": {
+          "required": "La contraseña es obligatoria",
+          "minLength": "La contraseña debe tener al menos 4 caracteres",
+          "maxLength": "La contraseña debe tener como máximo 255 caracteres"
+        },
+        "confirmPassword": {
+          "required": "Confirmar la contraseña es obligatorio",
+          "mismatch": "Las contraseñas no coinciden"
+        },
+        "terms": {
+          "required": "Debe aceptar los términos y condiciones"
+        }
+      }
+    },
+    "admin": {
+      "category": {
+        "name": {
+          "required": "El nombre de la categoría es obligatorio"
+        },
+        "description": {
+          "required": "La descripción es obligatoria"
+        }
+      },
+      "product": {
+        "name": {
+          "required": "El nombre del producto es obligatorio"
+        },
+        "description": {
+          "required": "La descripción es obligatoria"
+        },
+        "price": {
+          "required": "El precio es obligatorio"
+        },
+        "category": {
+          "required": "La categoría es obligatoria"
+        }
+      }
+    }
+  }
+}

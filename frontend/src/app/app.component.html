@@ -1,0 +1,45 @@
+<div *ngIf="!isAdminLoggedIn() && !isCustomerLoggedIn()">
+  <mat-toolbar color="primary">
+    <span class="navbar-brand">Mathildas by Mathildas</span>
+    <span class="spacer"></span>
+    <button mat-button routerLink="/order">Track Order</button>
+    <button mat-button routerLink="/sign-up">Register</button>
+    <button mat-button routerLink="/login">Login</button>
+    <button mat-button *ngIf="isLanguageSet(LANGUAGES.english.code)" (click)="switchLanguage(LANGUAGES.spanish.code)">{{ LANGUAGES.spanish.name + '/' + LANGUAGES.spanish.flag }}</button>
+    <button mat-button *ngIf="isLanguageSet(LANGUAGES.spanish.code)" (click)="switchLanguage(LANGUAGES.english.code)">{{ LANGUAGES.english.name + '/' + LANGUAGES.english.flag }}</button>
+  </mat-toolbar>
+</div>
+
+<div *ngIf="isAdminLoggedIn()">
+  <mat-toolbar color="primary">
+    <span class="navbar-brand">Mathildas by Mathildas</span>
+    <span class="spacer"></span>
+    <button mat-button [routerLink]="apiRoutes.admin.dashboard">Dashboard</button>
+    <button mat-button [routerLink]="apiRoutes.admin.analytics">Analytics</button>
+    <button mat-button [routerLink]="apiRoutes.admin.category">Category</button>
+    <button mat-button [routerLink]="apiRoutes.admin.product">Product</button>
+    <button mat-button [routerLink]="apiRoutes.admin.orders">Orders</button>
+    <button mat-button [routerLink]="apiRoutes.admin.postCoupon">Post Coupon</button>
+    <button mat-button [routerLink]="apiRoutes.admin.coupon">Coupons</button>
+    <button mat-button routerLinkActive="active" (click)="logout()">Logout</button>
+    <button mat-button *ngIf="isLanguageSet(LANGUAGES.english.code)" (click)="switchLanguage(LANGUAGES.spanish.code)">{{ LANGUAGES.spanish.name + '/' + LANGUAGES.spanish.flag }}</button>
+    <button mat-button *ngIf="isLanguageSet(LANGUAGES.spanish.code)" (click)="switchLanguage(LANGUAGES.english.code)">{{ LANGUAGES.english.name + '/' + LANGUAGES.english.flag }}</button>
+  </mat-toolbar>
+</div>
+
+<div *ngIf="isCustomerLoggedIn()">
+  <mat-toolbar color="primary">
+    <span class="navbar-brand">Mathildas by Mathildas</span>
+    <span class="spacer"></span>
+    <button mat-button [routerLink]="apiRoutes.customer.dashboard">Dashboard</button>
+    <button mat-button [routerLink]="apiRoutes.customer.cart">Cart</button>
+    <button mat-button [routerLink]="apiRoutes.customer.myOrders">My Orders</button>
+    <button mat-button [routerLink]="apiRoutes.customer.whishlist">Whishlist</button>
+    <button mat-button [routerLink]="apiRoutes.customer.profile">Profile</button>
+    <button mat-button routerLinkActive="active" (click)="logout()">Logout</button>
+    <button mat-button *ngIf="isLanguageSet(LANGUAGES.english.code)" (click)="switchLanguage(LANGUAGES.spanish.code)">{{ LANGUAGES.spanish.name + '/' + LANGUAGES.spanish.flag }}</button>
+    <button mat-button *ngIf="isLanguageSet(LANGUAGES.spanish.code)" (click)="switchLanguage(LANGUAGES.english.code)">{{ LANGUAGES.english.name + '/' + LANGUAGES.english.flag }}</button>
+  </mat-toolbar>
+</div>
+
+<router-outlet></router-outlet>
