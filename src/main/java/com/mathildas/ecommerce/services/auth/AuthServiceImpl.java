@@ -2,8 +2,12 @@ package com.mathildas.ecommerce.services.auth;
 
 import com.mathildas.ecommerce.dto.SignUpRequest;
 import com.mathildas.ecommerce.dto.UserDTO;
+import com.mathildas.ecommerce.entity.Order;
 import com.mathildas.ecommerce.entity.User;
+import com.mathildas.ecommerce.enums.OrderStatus;
 import com.mathildas.ecommerce.enums.UserRole;
+import com.mathildas.ecommerce.mapper.UserMapper;
+import com.mathildas.ecommerce.repository.OrderRepository;
 import com.mathildas.ecommerce.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +25,13 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Override
     public UserDTO createUser(SignUpRequest request) {
         User user = User.builder()
                 .email(request.getEmail())
@@ -30,12 +41,11 @@ public class AuthServiceImpl implements AuthService {
                 .build();
         User createdUser = userRepository.save(user);
 
-        return UserDTO.builder()
-                .id(createdUser.getId())
-                .email(createdUser.getEmail())
-                .name(createdUser.getName())
-                .userRole(createdUser.getRole())
-                .build();
+        Order order = Order.createEmptyOrder(createdUser);
+
+        orderRepository.save(order);
+
+        return userMapper.toDTO(createdUser);
     }
 
     @Override

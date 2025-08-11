@@ -6,11 +6,10 @@ import com.mathildas.ecommerce.utils.JwtUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.json.JSONObject;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +18,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 @Component
 @RequiredArgsConstructor
@@ -29,29 +31,29 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        var authHeader = request.getHeader(Constants.HTTP_HEADER_AUTHORIZATION);
-        String token = null;
         String userName = null;
+        String token = Optional.ofNullable(request.getCookies())
+                .map(Arrays::stream)
+                .orElse(Stream.empty())
+                .filter(cookie -> Constants.HTTP_ACCESS_COOKIE.equals(cookie.getName()))
+                .findFirst()
+                .map(Cookie::getValue)
+                .orElse(null);
 
-        if (authHeader != null && authHeader.startsWith(Constants.BEARER)) {
-            token = authHeader.substring(Constants.INDEX_TOKEN_EXTRACTION);
-            try {
-                userName = jwtUtil.extractUserName(token);
-            } catch (ExpiredJwtException e) {
-                logger.error("JWT expired", e);
-//                response.getWriter().write(
-//                        new JSONObject()
-//                                .put("data", JSONObject.NULL)
-//                                .put("message", e.getMessage())
-//                                .put("statusCode", HttpStatus.FORBIDDEN.value())
-//                                .toString()
-//                );
-            } catch (Exception e) {
-                logger.error("Error extracting username from token: {}", e);
-            }
+        if (token == null || SecurityContextHolder.getContext().getAuthentication() != null) {
+            filterChain.doFilter(request, response);
+            return;
         }
 
-        if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        try {
+            userName = jwtUtil.extractUserName(token);
+        } catch (ExpiredJwtException e) {
+            logger.error("JWT expired", e);
+        } catch (Exception e) {
+            logger.error("Error extracting username from token: {}", e);
+        }
+
+        if (userName != null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
 
             if (userDetails != null && jwtUtil.validateToken(token, userDetails)) {
@@ -66,5 +68,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getServletPath();
+        return Constants.REFRESH_TOKEN_PATH.equals(path);
     }
 }

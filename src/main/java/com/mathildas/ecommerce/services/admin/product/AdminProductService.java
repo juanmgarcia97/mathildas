@@ -4,7 +4,7 @@ import com.mathildas.ecommerce.dto.ProductDTO;
 
 import java.util.List;
 
-public interface ProductService {
+public interface AdminProductService {
 
     ProductDTO createProduct(ProductDTO productDTO);
     ProductDTO updateProduct(ProductDTO productDTO);

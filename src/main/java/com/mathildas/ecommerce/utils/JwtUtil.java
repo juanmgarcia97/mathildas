@@ -1,7 +1,6 @@
 package com.mathildas.ecommerce.utils;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -27,12 +26,27 @@ public class JwtUtil {
         return createToken(claims, userName);
     }
 
+    public String generateRefreshToken(String userName) {
+        Map<String, Object> claims = new HashMap<>();
+        return createRefreshToken(claims, userName);
+    }
+
     private String createToken(Map<String, Object> claims, String userName) {
          return Jwts.builder()
                  .claims(claims)
                  .subject(userName)
                  .issuedAt(new Date(System.currentTimeMillis()))
-                 .expiration(new Date(System.currentTimeMillis() + 1000 * 30 * 60))
+                 .expiration(new Date(System.currentTimeMillis() + Constants.JWT_EXPIRATION_TIME))
+                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
+                 .compact();
+    }
+
+    private String createRefreshToken(Map<String, Object> claims, String userName) {
+         return Jwts.builder()
+                 .claims(claims)
+                 .subject(userName)
+                 .issuedAt(new Date(System.currentTimeMillis()))
+                 .expiration(new Date(System.currentTimeMillis() + Constants.JWT_REFRESH_EXPIRATION_TIME))
                  .signWith(getSignKey(), SignatureAlgorithm.HS256)
                  .compact();
     }
